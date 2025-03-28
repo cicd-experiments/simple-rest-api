@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SimpleRestApiApplication {
 
-    protected SimpleRestApiApplication() {}
+    protected SimpleRestApiApplication() {
+
+    }
 
     /**
      * Main class of application.
