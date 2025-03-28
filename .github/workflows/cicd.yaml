@@ -2,25 +2,43 @@ name: name
 on: workflow_dispatch
 
 jobs:
-  checkstyle:
+  lint:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Set up JDK
-        uses: actions/setup-java@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Cache maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
-      - name: Make maven wrapper executable
-        run: chmod +x mvnw
-      - name: Run checkstyle
-        run: ./mvnw checkstyle:check
+         fetch-depth: 0
+      - name: Super-linter
+        uses: super-linter/super-linter@v7.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#      - name: Cache maven packages
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/.m2/repository
+#          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
+#      - name: Make maven wrapper executable
+#        run: chmod +x mvnw
+#      - name: Run checkstyle
+#        run: ./mvnw checkstyle:check
+
+
+
+
+
 #  test:
 #    runs-on: ubuntu-22.04
 #    services:
