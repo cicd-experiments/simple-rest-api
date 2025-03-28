@@ -1,4 +1,4 @@
 /**
- * package info sample
+ * Package info sample.
  */
 package ru.ddc.simplerestapi;
