@@ -1,4 +1,4 @@
-name: Test app with database in service-container
+name: name
 on: workflow_dispatch
 
 jobs:
