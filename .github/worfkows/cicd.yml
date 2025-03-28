@@ -1,0 +1,80 @@
+name: Test app with database in service-container
+on: workflow_dispatch
+
+jobs:
+  checkstyle:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Cache maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
+      - name: Make maven wrapper executable
+        run: chmod +x mvnw
+      - name: Run checkstyle
+        run: ./mvnw checkstyle:check
+#  test:
+#    runs-on: ubuntu-22.04
+#    services:
+#      test-db:
+#        image: postgres:17
+#        ports:
+#          - 5432:5432
+#        env:
+#          TZ: Europe/Moscow
+#          POSTGRES_DB: test
+#          POSTGRES_USER: user
+#          POSTGRES_PASSWORD: pass
+#    env:
+#      DATABASE_URL: 127.0.0.1:5432
+#      DATABASE_NAME: test
+#      DATABASE_USER: user
+#      DATABASE_PASS: pass
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#      - name: Cache maven packages
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/.m2/repository
+#          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
+#      - name: Make maven wrapper executable
+#        run: chmod +x mvnw
+#      - name: Run test
+#        run: ./mvnw -B test --file pom.xml
+#  build_artifact:
+#    needs:
+#      - checkstyle
+#      - test
+#    runs-on: ubuntu-22.04
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#      - name: Cache maven packages
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/.m2/repository
+#          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
+#      - name: Make maven wrapper executable
+#        run: chmod +x mvnw
+#      - name: build with maven
+#        run: ./mvnw -B package --file pom.xml
+
