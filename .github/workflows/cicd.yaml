@@ -1,6 +1,8 @@
 name: name
 on: workflow_dispatch
 
+permissions: read-all
+
 jobs:
   lint:
     runs-on: ubuntu-22.04
