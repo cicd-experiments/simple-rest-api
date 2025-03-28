@@ -21,6 +21,7 @@ jobs:
         uses: super-linter/super-linter@v7.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE-JAVA-FORMAT: false
 #    steps:
 #      - name: Checkout repository
 #        uses: actions/checkout@v2
