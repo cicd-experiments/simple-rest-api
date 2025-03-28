@@ -1,15 +1,15 @@
 name: name
 on: workflow_dispatch
 
-permissions: read-all
+#permissions: read-all
 
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      packages: read
-      statuses: write
+    permissions: read-all
+#      contents: read
+#      packages: read
+#      statuses: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
