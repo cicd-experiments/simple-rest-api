@@ -15,7 +15,8 @@ public class SimpleRestApiApplication {
     }
 
     /**
-     * Fix Utility classes should not have a public or default constructor issue.
+     * Fix Utility classes should not have a public
+     * or default constructor issue.
      */
     public void notForExecute() {
         throw new RuntimeException();
