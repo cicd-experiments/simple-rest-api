@@ -1,27 +1,36 @@
-name: name
+name: build and deploy to the test system
 on: workflow_dispatch
 
 permissions: {}
 
 jobs:
-  lint:
+  checksytle:
     runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      packages: read
-      statuses: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-         fetch-depth: 0
       - name: Make maven wrapper executable
         run: chmod +x mvnw
-      - name: Super-linter
-        uses: super-linter/super-linter@v7.3.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_GOOGLE_JAVA_FORMAT: false
+      - name: Run Checkstyle
+        run: ./mvnw checkstyle:check
+#  lint:
+#    runs-on: ubuntu-22.04
+#    permissions:
+#      contents: read
+#      packages: read
+#      statuses: write
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#        with:
+#         fetch-depth: 0
+#      - name: Make maven wrapper executable
+#        run: chmod +x mvnw
+#      - name: Super-linter
+#        uses: super-linter/super-linter@v7.3.0
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          VALIDATE_GOOGLE_JAVA_FORMAT: false
 #    steps:
 #      - name: Checkout repository
 #        uses: actions/checkout@v2
