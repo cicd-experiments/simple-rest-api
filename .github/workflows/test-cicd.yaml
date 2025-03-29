@@ -86,8 +86,8 @@ jobs:
         with:
           name: jar-and-dockerfile
           path: |
-            target/*.jar
-#            Dockerfile
+            Dockerfile
+            target/
   Build_image:
     permissions:
       packages: read
@@ -100,5 +100,5 @@ jobs:
         with:
           name: jar-and-dockerfile
       - name: Output content
-        run: ls -la -R
+        run: ls -la
 
