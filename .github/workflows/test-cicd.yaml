@@ -56,7 +56,7 @@ jobs:
           key: "${{ runner.os }}-m2-test-${{ hashFiles('**/pom.xml') }}"
       - name: Run test
         run: ./mvnw -B test --file pom.xml
-  Build:
+  Build_jar:
     permissions:
       contents: read
       packages: write
@@ -81,6 +81,10 @@ jobs:
         run: chmod +x mvnw
       - name: Build with maven
         run: ./mvnw -B package --file pom.xml -Dmaven.test.skip
+      - name: Output content
+        run: ls -la
+      - name: Output content
+        run: ls -la target
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
@@ -88,11 +92,11 @@ jobs:
           path: |
             target/*.jar
             Dockerfile
-  Deploy:
+  Build_docker_image:
     permissions:
       packages: read
     needs:
-      - Build
+      - Build_jar
     runs-on: ubuntu-22.04
     steps:
       - name: Download jar
