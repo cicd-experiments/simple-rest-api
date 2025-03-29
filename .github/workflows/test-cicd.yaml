@@ -86,7 +86,7 @@ jobs:
         with:
           name: jar-and-dockerfile
           path: |
-            Dockerfile
+#            Dockerfile
             target/
   Build_image:
     permissions:
