@@ -85,7 +85,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jar-and-dockerfile
-          path: target/
+          path: |
+            target/*.jar
+            Dockerfile
   Build_image:
     permissions:
       packages: read
