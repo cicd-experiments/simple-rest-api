@@ -1,12 +1,12 @@
 name: Deploy to the test system
 on: workflow_dispatch
 
-permissions: {}
+#permissions: {}
 
 jobs:
   Checkstyle:
-    permissions:
-      contents: read
+#    permissions:
+#      contents: read
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -21,8 +21,8 @@ jobs:
       - name: Run Checkstyle
         run: ./mvnw checkstyle:check
   Test:
-    permissions:
-      contents: read
+#    permissions:
+#      contents: read
     runs-on: ubuntu-22.04
     services:
       test-db:
@@ -57,9 +57,9 @@ jobs:
       - name: Run test
         run: ./mvnw -B test --file pom.xml
   Build_jar:
-    permissions:
-      contents: read
-      packages: write
+#    permissions:
+#      contents: read
+#      packages: write
     needs:
       - Checkstyle
       - Test
@@ -89,7 +89,7 @@ jobs:
             target/*.jar
             Dockerfile
   Build_and_push_image:
-    permissions: read-all
+#    permissions: read-all
     needs:
       - Build_jar
     runs-on: ubuntu-22.04
