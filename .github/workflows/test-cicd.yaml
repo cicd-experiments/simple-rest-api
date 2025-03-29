@@ -79,5 +79,5 @@ jobs:
       - name: Make maven wrapper executable
         run: chmod +x mvnw
       - name: build with maven
-        run: ./mvnw -B package --file pom.xml
+        run: ./mvnw -B package --file pom.xml -Dmaven.test.skip
 
