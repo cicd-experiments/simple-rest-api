@@ -84,8 +84,10 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
-          name: jar-file
-          path: target/*.jar
+          name: jar-and-dockerfile
+          path: |
+            target/*.jar
+            Dockerfile
   Deploy:
     permissions:
       packages: read
@@ -96,7 +98,7 @@ jobs:
       - name: Download jar
         uses: actions/download-artifact@v4
         with:
-          name: jar-file
+          name: jar-and-dockerfile
       - name: Output content
         run: ls -la
 
