@@ -88,9 +88,8 @@ jobs:
           path: |
             target/*.jar
             Dockerfile
-  Build_image:
-    permissions:
-      packages: read
+  Build_and_push_image:
+    permissions: read-all
     needs:
       - Build_jar
     runs-on: ubuntu-22.04
@@ -99,8 +98,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: jar-and-dockerfile
-      - name: Output content
-        run: ls -la
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
