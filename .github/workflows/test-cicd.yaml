@@ -100,5 +100,5 @@ jobs:
         with:
           name: jar-and-dockerfile
       - name: Output content
-        run: ls -la
+        run: ls -la -R
 
