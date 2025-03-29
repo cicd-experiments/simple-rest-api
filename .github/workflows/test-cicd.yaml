@@ -86,4 +86,17 @@ jobs:
         with:
           name: jar-file
           path: target/*.jar
+  Deploy:
+    permissions:
+      packages: read
+    needs:
+      - Build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download jar
+        uses: actions/download-artifact@v4
+        with:
+          name: jar-file
+      - name: Output content
+        run: ls -la
 
