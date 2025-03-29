@@ -56,7 +56,7 @@ jobs:
           key: "${{ runner.os }}-m2-test-${{ hashFiles('**/pom.xml') }}"
       - name: Run test
         run: ./mvnw -B test --file pom.xml
-  build-jar:
+  build:
     permissions:
       contents: read
     needs:
@@ -75,9 +75,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: "${{ runner.os }}-m2-build-jar-${{ hashFiles('**/pom.xml') }}"
+          key: "${{ runner.os }}-m2-build-${{ hashFiles('**/pom.xml') }}"
       - name: Make maven wrapper executable
         run: chmod +x mvnw
-      - name: build with maven
+      - name: Build with maven
         run: ./mvnw -B package --file pom.xml -Dmaven.test.skip
+      - name: Upload jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: jar-file
+          path: target/*.jar
 
