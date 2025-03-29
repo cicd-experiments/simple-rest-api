@@ -1,10 +1,10 @@
-name: build and deploy to the test system
+name: Deploy to the test system
 on: workflow_dispatch
 
 permissions: {}
 
 jobs:
-  checkstyle:
+  Checkstyle:
     permissions:
       contents: read
     runs-on: ubuntu-22.04
@@ -20,7 +20,7 @@ jobs:
           key: "${{ runner.os }}-m2-checksytle-${{ hashFiles('**/pom.xml') }}"
       - name: Run Checkstyle
         run: ./mvnw checkstyle:check
-  test:
+  Test:
     permissions:
       contents: read
     runs-on: ubuntu-22.04
@@ -56,13 +56,13 @@ jobs:
           key: "${{ runner.os }}-m2-test-${{ hashFiles('**/pom.xml') }}"
       - name: Run test
         run: ./mvnw -B test --file pom.xml
-  build:
+  Build:
     permissions:
       contents: read
       packages: write
     needs:
-      - checkstyle
-      - test
+      - Checkstyle
+      - Test
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
@@ -82,7 +82,7 @@ jobs:
       - name: Build with maven
         run: ./mvnw -B package --file pom.xml -Dmaven.test.skip
       - name: Upload jar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jar-file
           path: target/*.jar
