@@ -56,7 +56,9 @@ jobs:
           key: "${{ runner.os }}-m2-test-${{ hashFiles('**/pom.xml') }}"
       - name: Run test
         run: ./mvnw -B test --file pom.xml
-  build_jar:
+  build-jar:
+    permissions:
+      contents: read
     needs:
       - checkstyle
       - test
