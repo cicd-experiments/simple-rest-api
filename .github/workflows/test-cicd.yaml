@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
+          key: "${{ runner.os }}-m2-checksytle-${{ hashFiles('**/pom.xml') }}"
       - name: Run Checkstyle
         run: ./mvnw checkstyle:check
   test:
@@ -47,13 +47,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Make maven wrapper executable
+        run: chmod +x mvnw
       - name: Cache maven packages
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: "${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}"
-      - name: Make maven wrapper executable
-        run: chmod +x mvnw
+          key: "${{ runner.os }}-m2-test-${{ hashFiles('**/pom.xml') }}"
       - name: Run test
         run: ./mvnw -B test --file pom.xml
 #  build_artifact:
