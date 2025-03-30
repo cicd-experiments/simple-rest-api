@@ -40,6 +40,9 @@ public class ThingTodoController {
     public ResponseEntity<ThingTodoResponse> getThingTodoById(
             @PathVariable final Long id) {
         ThingTodo thingTodo = service.getThingTodoById(id);
-        return ResponseEntity.ok(mapper.map(thingTodo, ThingTodoResponse.class));
+        return ResponseEntity.ok(mapper.map(
+                thingTodo,
+                ThingTodoResponse.class
+        ));
     }
 }
