@@ -131,4 +131,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: docker run -d --name simple-rest-api --pull --rm -p 8888:8080 app:latest
+          script: docker run -d --name simple-rest-api --pull always --rm -p 8888:8080 app:latest
