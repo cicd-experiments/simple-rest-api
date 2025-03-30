@@ -10,7 +10,16 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Todo {
+    /**
+     * Identifier of model.
+     */
     private Long id;
+    /**
+     * Name of model.
+     */
     private String name;
+    /**
+     * Description of model.
+     */
     private String description;
 }

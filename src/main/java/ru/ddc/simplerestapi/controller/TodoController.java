@@ -11,18 +11,35 @@ import ru.ddc.simplerestapi.service.TodoService;
 
 @RestController
 public class TodoController {
-    private final TodoService todoService;
+    /**
+     * Service for Todo.
+     */
+    private final TodoService service;
+    /**
+     * Model mapper.
+     */
     private final ModelMapper mapper;
 
-    public TodoController(TodoService todoService,
-                          ModelMapper modelMapper) {
-        this.todoService = todoService;
+    /**
+     * Controller constructor.
+     * @param todoService service object
+     * @param modelMapper mapper object
+     */
+    public TodoController(final TodoService todoService,
+                          final ModelMapper modelMapper) {
+        this.service = todoService;
         this.mapper = modelMapper;
     }
 
+    /**
+     * Get TodoResponse by id.
+     * @param id identifier of object
+     * @return ResponseEntity
+     */
     @GetMapping("/todos/{id}")
-    public ResponseEntity<TodoResponse> getTodoById(@PathVariable Long id) {
-        Todo todo = todoService.getTodoById(id);
+    public ResponseEntity<TodoResponse> getTodoById(
+            @PathVariable final Long id) {
+        Todo todo = service.getTodoById(id);
         return ResponseEntity.ok(mapper.map(todo, TodoResponse.class));
     }
 }

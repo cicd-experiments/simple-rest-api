@@ -6,13 +6,25 @@ import ru.ddc.simplerestapi.model.Todo;
 
 @Service
 public class TodoService {
-    private final TodoDao todoDao;
+    /**
+     * Dao object.
+     */
+    private final TodoDao dao;
 
-    public TodoService(TodoDao todoDao) {
-        this.todoDao = todoDao;
+    /**
+     * Constructor.
+     * @param todoDao dao object
+     */
+    public TodoService(final TodoDao todoDao) {
+        this.dao = todoDao;
     }
 
-    public Todo getTodoById(Long id) {
-        return todoDao.getTodoById(id).orElseThrow();
+    /**
+     * Get by id method.
+     * @param id identifier of object
+     * @return Todo object
+     */
+    public Todo getTodoById(final Long id) {
+        return dao.getTodoById(id).orElseThrow();
     }
 }

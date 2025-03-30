@@ -6,17 +6,32 @@ import ru.ddc.simplerestapi.model.Todo;
 
 import java.util.Optional;
 
+/**
+ * Class for asses to database.
+ */
 @Component
-public class TodoDao {
-    private final JdbcClient jdbcClient;
+public final class TodoDao {
+    /**
+     * JdbcClient object.
+     */
+    private final JdbcClient client;
 
-    public TodoDao(JdbcClient jdbcClient) {
-        this.jdbcClient = jdbcClient;
+    /**
+     * Constructor.
+     * @param jdbcClient client object
+     */
+    public TodoDao(final JdbcClient jdbcClient) {
+        this.client = jdbcClient;
     }
 
-    public Optional<Todo> getTodoById(Long id) {
+    /**
+     * Get object by id.
+     * @param id long
+     * @return Todo object
+     */
+    public Optional<Todo> getTodoById(final Long id) {
         String sql = "select * from todos where id = ?";
-        return jdbcClient.sql(sql)
+        return client.sql(sql)
                 .param(id)
                 .query(Todo.class)
                 .optional();
