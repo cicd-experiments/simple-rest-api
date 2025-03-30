@@ -1,0 +1,1 @@
+insert into todos(id, name, description) values (1, 'name 1', 'description 1');
