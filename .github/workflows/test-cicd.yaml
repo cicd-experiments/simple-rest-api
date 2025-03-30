@@ -131,4 +131,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+          script: |
+            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
