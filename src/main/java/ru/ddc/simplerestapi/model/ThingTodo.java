@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class Todo {
+public class ThingTodo {
     /**
-     * Identifier of model.
+     * Identifier of ThingToDo model.
      */
     private Long id;
     /**
-     * Name of model.
+     * Name of ThingToDo model.
      */
     private String name;
     /**
-     * Description of model.
+     * Description of ThingToDo model.
      */
     private String description;
 }

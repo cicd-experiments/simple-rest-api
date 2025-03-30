@@ -5,16 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import ru.ddc.simplerestapi.controller.dto.TodoResponse;
-import ru.ddc.simplerestapi.model.Todo;
-import ru.ddc.simplerestapi.service.TodoService;
+import ru.ddc.simplerestapi.controller.dto.ThingTodoResponse;
+import ru.ddc.simplerestapi.model.ThingTodo;
+import ru.ddc.simplerestapi.service.ThingTodoService;
 
 @RestController
-public class TodoController {
+public class ThingTodoController {
     /**
-     * Service for Todo.
+     * Service for ThingTodo.
      */
-    private final TodoService service;
+    private final ThingTodoService service;
     /**
      * Model mapper.
      */
@@ -22,12 +22,12 @@ public class TodoController {
 
     /**
      * Controller constructor.
-     * @param todoService service object
+     * @param thingTodoService service object
      * @param modelMapper mapper object
      */
-    public TodoController(final TodoService todoService,
-                          final ModelMapper modelMapper) {
-        this.service = todoService;
+    public ThingTodoController(final ThingTodoService thingTodoService,
+                               final ModelMapper modelMapper) {
+        this.service = thingTodoService;
         this.mapper = modelMapper;
     }
 
@@ -37,9 +37,9 @@ public class TodoController {
      * @return ResponseEntity
      */
     @GetMapping("/todos/{id}")
-    public ResponseEntity<TodoResponse> getTodoById(
+    public ResponseEntity<ThingTodoResponse> getThingTodoById(
             @PathVariable final Long id) {
-        Todo todo = service.getTodoById(id);
-        return ResponseEntity.ok(mapper.map(todo, TodoResponse.class));
+        ThingTodo thingTodo = service.getThingTodoById(id);
+        return ResponseEntity.ok(mapper.map(thingTodo, ThingTodoResponse.class));
     }
 }

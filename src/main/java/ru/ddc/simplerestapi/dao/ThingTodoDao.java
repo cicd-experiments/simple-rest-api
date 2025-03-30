@@ -2,7 +2,7 @@ package ru.ddc.simplerestapi.dao;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Component;
-import ru.ddc.simplerestapi.model.Todo;
+import ru.ddc.simplerestapi.model.ThingTodo;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import java.util.Optional;
  * Class for asses to database.
  */
 @Component
-public final class TodoDao {
+public final class ThingTodoDao {
     /**
      * JdbcClient object.
      */
@@ -20,20 +20,20 @@ public final class TodoDao {
      * Constructor.
      * @param jdbcClient client object
      */
-    public TodoDao(final JdbcClient jdbcClient) {
+    public ThingTodoDao(final JdbcClient jdbcClient) {
         this.client = jdbcClient;
     }
 
     /**
      * Get object by id.
      * @param id long
-     * @return Todo object
+     * @return ThingTodo object
      */
-    public Optional<Todo> getTodoById(final Long id) {
+    public Optional<ThingTodo> getThingTodoById(final Long id) {
         String sql = "select * from todos where id = ?";
         return client.sql(sql)
                 .param(id)
-                .query(Todo.class)
+                .query(ThingTodo.class)
                 .optional();
     }
 }
