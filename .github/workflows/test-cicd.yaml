@@ -134,3 +134,5 @@ jobs:
           script: |
             docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
             docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+            whoami
+            ls -la
