@@ -117,3 +117,18 @@ jobs:
           context: .
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+  Run_image_on_server:
+    permissions:
+      contents: read
+    needs:
+      - Build_and_push_image
+    runs-on: ubuntu-22.04
+    steps:
+      - name: execute docker run on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: docker run -d --name simple-rest-api --pull --rm -p 8888:8080 app:latest
