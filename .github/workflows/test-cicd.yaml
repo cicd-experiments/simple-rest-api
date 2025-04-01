@@ -128,7 +128,7 @@ jobs:
           script: |
             docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
             docker run --rm -d \
-              -p 8765:8080
+              -p 8765:8080 \
               -e DATABASE_URL=database \
               -e DATABASE_NAME=cicd \
               -e DATABASE_USER=${{ secrets.DATABASE_USER }} \
