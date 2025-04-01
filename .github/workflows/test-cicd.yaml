@@ -128,6 +128,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker image inspect ${{ vars.IMAGE_NAME }} &> /dev/null || docker pull ${{ vars.IMAGE_NAME }}
+            docker image inspect ${{ vars.IMAGE_NAME }}:latest &> /dev/null || docker pull ${{ vars.IMAGE_NAME }}:latest
 #            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
 #            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
