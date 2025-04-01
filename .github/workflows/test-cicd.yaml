@@ -96,10 +96,6 @@ jobs:
       - Build_jar
     runs-on: ubuntu-22.04
     steps:
-      - name: Debug variables
-        run: |
-          echo "Username: ${{ vars.DOCKERHUB_USERNAME }}"
-          echo "Token exists: ${{ secrets.DOCKERHUB_TOKEN != '' }}"
       - name: Download jar
         uses: actions/download-artifact@v4
         with:
@@ -116,7 +112,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
   Run_image_on_server:
     permissions:
       contents: read
@@ -132,7 +128,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
-            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
-            whoami
-            ls -la
+            docker image inspect ${{ vars.IMAGE_NAME }} &> /dev/null || docker pull ${{ vars.IMAGE_NAME }}
+#            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+#            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
