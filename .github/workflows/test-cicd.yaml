@@ -1,8 +1,6 @@
-name: Deploy to the dev system
+name: Deploy to the development stand
 on: workflow_dispatch
-
 permissions: {}
-
 jobs:
   Checkstyle:
     permissions:
@@ -129,7 +127,11 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
-#            docker image inspect ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest &> /dev/null || \
-#              docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
-#            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
-#            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+            docker run --rm -d \
+              -e DATABASE_URL=database \
+              -e DATABASE_NAME=cicd \
+              -e DATABASE_USER=${{ secrets.DATABASE_USER }} \
+              -e DATABASE_PASS=${{ DATABASE_PASS }} \
+              --network database \
+              ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+
