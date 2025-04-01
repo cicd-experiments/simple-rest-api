@@ -131,7 +131,7 @@ jobs:
               -e DATABASE_URL=database \
               -e DATABASE_NAME=cicd \
               -e DATABASE_USER=${{ secrets.DATABASE_USER }} \
-              -e DATABASE_PASS=${{ DATABASE_PASS }} \
+              -e DATABASE_PASS=${{ secrets.DATABASE_PASS }} \
               --network database \
               ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
 
