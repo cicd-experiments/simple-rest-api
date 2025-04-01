@@ -1,4 +1,4 @@
-name: Deploy to the test system
+name: Deploy to the dev system
 on: workflow_dispatch
 
 permissions: {}
@@ -128,7 +128,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker image inspect ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest &> /dev/null || \
-              docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+            docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+#            docker image inspect ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest &> /dev/null || \
+#              docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
 #            docker image pull ${{ vars.DOCKERHUB_USERNAME }}/app:latest
 #            docker run --rm -d ${{ vars.DOCKERHUB_USERNAME }}/app:latest
